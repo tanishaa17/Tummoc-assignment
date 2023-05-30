@@ -1,0 +1,38 @@
+#loginForm{
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    margin-top: 20vh;
+    background: #0E2E39;
+    padding: 4% 0%;
+    color: #EFCB0F;
+}
+
+#loginForm input {
+    padding: 1%;
+    width: 40%;
+    font-weight: bold;
+    margin-bottom: 2%;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 4px solid #EFCB0F;
+    border-right: 4px solid #EFCB0F;
+}
+
+#loginBtn {
+    padding: 1%;
+    width: 20%;
+    font-weight: bold;
+    margin-bottom: 2%;
+    border-radius: 5px;
+    border: none;
+    border-bottom: 4px solid #EFCB0F;
+    border-right: 4px solid #EFCB0F;
+    color: gray;
+}
+
+#loginBtn:hover {
+    background: #0E2E39;
+    color: #EFCB0F;
+    cursor: pointer;
+}
