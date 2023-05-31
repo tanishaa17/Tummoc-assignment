@@ -2,7 +2,12 @@ const express = require("express");
 const { connection } = require("./configs/db");
 const app = express();
 require("dotenv").config();
-// app.use();
+const userRoute = require("./Routes/userRoute")
+
+app.use(express.json())
+app.use('/api/user/', userRoute);
+
+
 
 const port = process.env.REACT_APP_PORT || 3000;
 
