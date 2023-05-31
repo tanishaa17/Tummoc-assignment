@@ -7,10 +7,11 @@ import {
 // import { composeWithDevTools } from "redux-devtools-extension";
 
 import thunk from "redux-thunk";
-import { userReducer } from "./Reducers/user.reducer";
+import { loginReducer, registerReducer } from "./Reducers/user.reducer";
 
 const reducer = combineReducers({
-  user: userReducer
+  register: registerReducer,
+  login: loginReducer
 });
 
 const composeEnhancers =

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux'
 import '../Register/Register.css'
 import { Link } from "react-router-dom";
+import { userRegister } from "../Redux/Actions/action";
 
 export const Register = () => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const dispatch = useDispatch()
   const register = () => {
+
     if (password !== confirmPassword) {
       alert(`Password doesn't match`)
     } else {
@@ -17,7 +21,8 @@ export const Register = () => {
         email,
         password
       }
-      console.log(userData);
+      // console.log(userData);
+      dispatch(userRegister(userData));
     }
   }
   return (
