@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../Register/Register.css'
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const [name, setName] = useState("");
@@ -33,7 +34,7 @@ export const Register = () => {
       <button id="registerBtn" type="button" onClick={register}>
         REGISTER
       </button>
-
+      <p>if you already have an account, please <Link id="loginLink" to='/login'>Login</Link></p>
     </form >
   )
 };
