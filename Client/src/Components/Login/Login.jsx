@@ -16,7 +16,7 @@ export const Login = () => {
       <button id="loginBtn" type="button">
         LOGIN
       </button>
-      <p>if you don't have an account, please <Link id="registerLink" to='/register'>Register</Link></p>
+      <p>Don't have an account? <Link id="registerLink" to='/register'>Create Account</Link></p>
     </form>
     
   )

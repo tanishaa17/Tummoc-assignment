@@ -21,7 +21,7 @@ export const userReducer = (state = initialState, { type, payload }) => {
         case USER_REGISTER_FAILED:
             return {
                 ...state,
-                isError: true
+                isError: payload
             }
 
         default:
