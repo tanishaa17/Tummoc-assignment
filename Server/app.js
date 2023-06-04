@@ -1,12 +1,19 @@
 const express = require("express");
-const { connection } = require("./configs/db");
+const { connection } = require("./src/configs/db");
 const app = express();
 require("dotenv").config();
-const userRoute = require("./Routes/userRoute")
-
+const cors = require("cors");
+const userRoute = require("./src/Routes/userRoute")
 app.use(express.json())
-app.use('/api/user/', userRoute);
 
+
+app.use(
+    cors({
+        origin: true,
+    })
+);
+app.use("/api/user/", userRoute)
+app.use("/api/user/", userRoute)
 
 
 const port = process.env.REACT_APP_PORT || 3000;
@@ -19,4 +26,5 @@ app.listen(port, async () => {
         console.log(`Error while connecting DB : ${error}`);
     }
     console.log(`Server is running on ${port}`);
-})
+});
+
