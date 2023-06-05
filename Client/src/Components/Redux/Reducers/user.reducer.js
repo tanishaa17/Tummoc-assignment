@@ -22,6 +22,7 @@ export const registerReducer = (state = initialState, { type, payload }) => {
         case USER_REGISTER_FAILED:
             return {
                 ...state,
+                isLoading: false,
                 isError: payload
             }
 
@@ -33,6 +34,7 @@ export const loginReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case USER_LOGIN_REQUEST:
             return {
+                ...state,
                 isLoading: true
             }
         case USER_LOGIN_SUCCESS:
@@ -43,13 +45,15 @@ export const loginReducer = (state = initialState, { type, payload }) => {
             }
         case USER_LOGIN_FAILED:
             return {
+                ...state,
+                isLoading: false,
                 isError: payload
             }
         case USER_LOGOUT:
             return {
-                ...state,
                 isError: false,
                 isAuthenticated: false,
+                currentUser: null
             }
 
         default:

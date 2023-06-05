@@ -14,10 +14,10 @@ app.use(
         origin: true,
     })
 );
-app.use("/api/user/", userRoute)
-app.use("/api/user/", userRoute)
-app.use(authenticate)
-app.use("/api/user/", demoRoute);
+app.use("/user/", userRoute)
+app.use("/user/", userRoute)
+app.use("/", demoRoute);
+// app.use(authenticate)
 
 const port = process.env.REACT_APP_PORT || 3000;
 

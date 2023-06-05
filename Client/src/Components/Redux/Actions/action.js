@@ -8,10 +8,13 @@ export const userRegister = (userData) => async (dispatch) => {
     try {
         const res = await api.post(`/user/register`, userData)
         dispatch({ type: USER_REGISTER_SUCCESS, payload: res.data })
-        // window.location.href = "/login"
+        alert(`Registered successfully`)
+        window.location.href = "/login"
         // console.log(res);
     } catch (error) {
         dispatch({ type: USER_REGISTER_FAILED, payload: error });
+        alert(error.response.data.message)
+
     }
 }
 export const userLogin = (userCreds) => async (dispatch) => {
@@ -19,10 +22,13 @@ export const userLogin = (userCreds) => async (dispatch) => {
     try {
         const res = await api.post(`/user/login`, userCreds)
         dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data })
+        alert(`Logged in successfully`)
+        window.location.href = "/"
         // console.log(res);
-        // window.location.href = "/"
     } catch (error) {
         dispatch({ type: USER_LOGIN_FAILED, payload: error })
+        alert(error.response.data.message)
+        // console.log(error)
     }
 }
 

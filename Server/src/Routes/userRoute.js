@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
 
 
     } catch (error) {
-        return res.status(400).send({ message: error });
+        return res.status(200).send({ message: "Email already exists." });
     }
 })
 

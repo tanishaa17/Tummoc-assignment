@@ -26,7 +26,7 @@ export const Register = () => {
     }
   }
   return (
-    <form id="registerForm">
+    <form id="registerForm" onSubmit={(e) => e.preventDefault()}>
       <h2>Register Page</h2>
 
       <input type="text" placeholder="Enter Name" required value={name} onChange={(e) => { setName(e.target.value) }} /> <br />
@@ -36,7 +36,7 @@ export const Register = () => {
       <input type="password" placeholder="Password" required value={password} onChange={(e) => { setPassword(e.target.value) }} /> <br />
       <input type="password" placeholder="Confirm password" required value={confirmPassword} onChange={(e) => { setConfirmPassword(e.target.value) }} /> <br />
 
-      <button id="registerBtn" type="button" onClick={register}>
+      <button id="registerBtn" type="submit" onClick={register}>
         REGISTER
       </button>
       <p>Already have an account? <Link id="loginLink" to='/login'>Login</Link></p>
