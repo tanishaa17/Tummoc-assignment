@@ -1,9 +1,10 @@
-import { USER_LOGIN_FAILED, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAILED, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Actions/actionType";
+import { USER_LOGOUT, USER_LOGIN_FAILED, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAILED, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../Actions/actionType";
 
 const initialState = {
     userData: [],
     isLoading: false,
-    isError: false
+    isError: false,
+    isAuthenticated: false,
 }
 export const registerReducer = (state = initialState, { type, payload }) => {
     switch (type) {
@@ -37,11 +38,18 @@ export const loginReducer = (state = initialState, { type, payload }) => {
         case USER_LOGIN_SUCCESS:
             return {
                 isLoading: false,
+                isAuthenticated: true,
                 currentUser: payload
             }
         case USER_LOGIN_FAILED:
             return {
                 isError: payload
+            }
+        case USER_LOGOUT:
+            return {
+                ...state,
+                isError: false,
+                isAuthenticated: false,
             }
 
         default:

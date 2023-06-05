@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import '../Login/Login.css'
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../Redux/Actions/action";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch()
-
+  const { isAuthenticated, currentUser } = useSelector((store) => store.loginReducer)
   const login = () => {
     const loginCreds = {
       email, password
@@ -15,6 +15,8 @@ export const Login = () => {
     // console.log(loginCreds);
     dispatch(userLogin(loginCreds))
   }
+
+
   return (
     <form id="loginForm">
       <h2 >Login Page</h2>

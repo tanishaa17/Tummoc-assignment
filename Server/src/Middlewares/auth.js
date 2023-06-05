@@ -6,6 +6,8 @@ const authenticate = (req, res, next) => {
     if (token) {
         const decoded = jwt.verify(token, process.env.REACT_APP_SECRET_KEY);
         if (decoded) {
+            const userId = decoded.userId;
+            req.body.userId = userId;
             next();
         } else {
             res.send(`Please login first`);

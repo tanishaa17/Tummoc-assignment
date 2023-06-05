@@ -10,8 +10,8 @@ import thunk from "redux-thunk";
 import { loginReducer, registerReducer } from "./Reducers/user.reducer";
 
 const reducer = combineReducers({
-  register: registerReducer,
-  login: loginReducer
+  registerReducer: registerReducer,
+  loginReducer: loginReducer
 });
 
 const composeEnhancers =

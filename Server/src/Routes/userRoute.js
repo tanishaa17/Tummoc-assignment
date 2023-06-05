@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
             // res.send(`User logged in successfully`)
             bcrypt.compare(password, user[0].password).then((result) => {
                 if (result) {
-                    const token = jwt.sign({ foo: 'bar' }, process.env.REACT_APP_SECRET_KEY);
+                    const token = jwt.sign({ userId: user[0]._id }, process.env.REACT_APP_SECRET_KEY);
                     res.send({ msg: `Logged in successfully`, token })
                 } else {
                     res.status(400).send({ message: `Email or password is incorrect` });
