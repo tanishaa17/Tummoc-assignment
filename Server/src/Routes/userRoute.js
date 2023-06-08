@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../Models/userModel')
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt")
+require('dotenv').config()
 router.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
     try {
@@ -18,7 +19,7 @@ router.post("/register", async (req, res) => {
                 } else {
                     const newUser = new User({ name, email, password: hashedPassword });// USING HASHED PASSWORD FOR REGISTERING
                     await newUser.save()
-                    res.send(`User Registered successfully`)
+                    res.status(201).send(`User Registered successfully`)
                 }
             });
         }
@@ -34,6 +35,7 @@ router.post("/login", async (req, res) => {
 
     try {
         const user = await User.find({ email });
+
         if (user.length > 0) {
             // res.send(`User logged in successfully`)
             bcrypt.compare(password, user[0].password).then((result) => {

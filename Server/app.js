@@ -4,19 +4,19 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const userRoute = require("./src/Routes/userRoute")
-const demoRoute = require("./src/Routes/demoRoute");
-const { authenticate } = require("./src/Middlewares/auth");
+const homeRoute = require("./src/Routes/homeRoute");
+// const { authenticate } = require("./src/Middlewares/auth");
+const passport = require("./src/configs/passport")
 app.use(express.json())
-
+app.use(passport.initialize());
 
 app.use(
     cors({
         origin: true,
     })
 );
-app.use("/user/", userRoute)
-app.use("/user/", userRoute)
-app.use("/", demoRoute);
+app.use("/user/", userRoute);
+app.use("/", homeRoute);
 // app.use(authenticate)
 
 const port = process.env.REACT_APP_PORT || 3000;
