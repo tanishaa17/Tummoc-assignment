@@ -7,9 +7,10 @@ const userRoute = require("./src/Routes/userRoute")
 const homeRoute = require("./src/Routes/homeRoute");
 const cityRoute = require("./src/Routes/cityRoute");
 const { authenticate } = require("./src/Middlewares/auth");
-const passport = require("./src/configs/passport")
-app.use(express.json())
-app.use(passport.initialize());
+const passport = require('passport');
+const initializePassport = require("./src/configs/passport")
+app.use(express.json());
+app.use(passport.initialize(initializePassport(passport)))
 
 app.use(
     cors({
@@ -20,6 +21,7 @@ app.use("/", homeRoute);
 app.use("/user/", userRoute);
 app.use(authenticate)
 app.use("/user/", cityRoute);
+
 const port = process.env.REACT_APP_PORT || 3000;
 
 app.listen(port, async () => {
