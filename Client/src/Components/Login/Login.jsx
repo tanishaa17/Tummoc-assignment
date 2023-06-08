@@ -3,7 +3,7 @@ import '../Login/Login.css'
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../Redux/Actions/action";
-
+import { FcGoogle } from "react-icons/fc"
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,7 +40,13 @@ export const Login = () => {
 
       <button id="loginBtn" type="submit" onClick={handleLogin}>
         LOGIN
-      </button>
+      </button> <br />
+      or <br />
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        Sign in with
+
+        <FcGoogle style={{ marginLeft: "5px", cursor: "pointer" }} />
+      </div>
       <p>Don't have an account? <Link id="registerLink" to='/register'>Create Account</Link></p>
     </form>
 

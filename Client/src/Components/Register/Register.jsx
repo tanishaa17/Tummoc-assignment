@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import '../Register/Register.css'
 import { Link } from "react-router-dom";
 import { userRegister } from "../Redux/Actions/action";
+import { FcGoogle } from "react-icons/fc"
+
 
 export const Register = () => {
 
@@ -38,7 +40,13 @@ export const Register = () => {
 
       <button id="registerBtn" type="submit" onClick={register}>
         REGISTER
-      </button>
+      </button> <br />
+      or <br />
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        Sign up with
+
+        <FcGoogle style={{ marginLeft: "5px", cursor: "pointer" }} />
+      </div>
       <p>Already have an account? <Link id="loginLink" to='/login'>Login</Link></p>
     </form >
   )
