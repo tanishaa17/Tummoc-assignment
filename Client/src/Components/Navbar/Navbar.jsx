@@ -17,8 +17,17 @@ export const Navbar = () => {
             <img onClick={() => navigate('/')} src="https://tummoc.com/images/news/financialexpress-tummoc.png" alt="tummoc-logo" />
 
             <div id='loginDiv'>
-                {currentUser ? <p>{currentUser.name}</p> : <p onClick={() => navigate('/login')}>Login</p>}
-                {isAuthenticated ? <p onClick={handleLogout}>Logout</p> : <p onClick={() => navigate('/register')}>Register</p>}
+                {currentUser ? (
+                    <>
+                        <p>{currentUser.name}</p>
+                        <p onClick={handleLogout}>Logout</p>
+                    </>
+                ) : (
+                    <>
+                        <p onClick={() => navigate('/login')}>Login</p>
+                        <p onClick={() => navigate('/register')}>Register</p>
+                    </>
+                )}
 
             </div>
         </div>
