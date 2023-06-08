@@ -37,16 +37,13 @@ router.post("/login", async (req, res, next) => {
             return next(err);
         }
         if (!user) {
-            return res.status(401).send({ message: 'Unauthorized' });
-        }
+            try {
+                const { email, password } = req.body;
+                const user = await User.findOne({ email });
+                if (!user) {
+                    return res.status(400).send({ message: "Email doesn't exist" });
+                }
 
-        try {
-            const { email, password } = req.body;
-            const user = await User.findOne({ email });
-            if (!user) {
-                return res.status(400).send({ message: "Email doesn't exist" });
-            }
-            if (user.length > 0) {
                 // res.send(`User logged in successfully`)
                 bcrypt.compare(password, user.password).then((result) => {
                     if (result) {
@@ -57,13 +54,17 @@ router.post("/login", async (req, res, next) => {
                         res.status(400).send({ message: `Email or password is incorrect` });
                     }
                 });
-            } else {
-                return res.status(400).send({ message: `Email doesn't exist` });
-            }
-        } catch (error) {
 
-            return res.status(500).send({ message: "Internal Server Error" });
+            } catch (error) {
+
+                return res.status(500).send({ message: "Internal Server Error" });
+            }
+        } else {
+            // User is already authenticated via JWT
+            res.send({ message: "Already authenticated" });
         }
+
+
     })(req, res, next);
 
 })
