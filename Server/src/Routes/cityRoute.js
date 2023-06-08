@@ -1,9 +1,9 @@
-
-
-// Set up routes
-app.get('/', async (req, res) => {
+const express = require("express");
+const cityRoute = express.Router();
+const User = require('../Models/userModel')
+cityRoute.get('/', async (req, res) => {
     try {
-        // Perform aggregation and populate query
+        // Aggregation and populate query
         const users = await User.aggregate([
             {
                 $lookup: {
@@ -22,7 +22,3 @@ app.get('/', async (req, res) => {
     }
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
