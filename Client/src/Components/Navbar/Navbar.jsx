@@ -7,6 +7,7 @@ import { userLogout } from '../Redux/Actions/action'
 export const Navbar = () => {
     const { isAuthenticated, currentUser } = useSelector((store) => store.loginReducer);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const [currentLoggedInUser, setCurrentLoggedInUser] = useState({});
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -16,9 +17,11 @@ export const Navbar = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const user = JSON.parse(localStorage.getItem("user"))  || {};
+        setCurrentLoggedInUser(user)
         if (token) setIsUserLoggedIn(true);
         else setIsUserLoggedIn(false);
-    }, [])
+    }, [isAuthenticated, currentUser])
     return (
         <div id='navbar'>
             <img onClick={() => navigate('/')} src="https://tummoc.com/images/news/financialexpress-tummoc.png" alt="tummoc-logo" />
@@ -26,7 +29,7 @@ export const Navbar = () => {
             <div id='loginDiv'>
                 {isUserLoggedIn ? (
                     <>
-                        <p>{isUserLoggedIn}</p>
+                        <p>{currentLoggedInUser.name}</p>
                         <p onClick={handleLogout}>Logout</p>
                     </>
                 ) : (

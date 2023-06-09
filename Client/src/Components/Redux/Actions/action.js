@@ -23,6 +23,7 @@ export const userLogin = async (userCreds) => {
     try {
         const res = await api.post(`/user/login`, userCreds)
         localStorage.setItem("token", res.data.token)
+        localStorage.setItem("user", JSON.stringify(res.data.user))
         // dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data })
         alert(`Logged in successfully`);
         console.log(res.data);
@@ -34,9 +35,10 @@ export const userLogin = async (userCreds) => {
     }
 }
 
-export const userLogout = async () => {
-    // dispatch({ type: USER_LOGOUT })
+export const userLogout =  () => async(dispatch)=> {
     localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    dispatch({ type: USER_LOGOUT })
 }
 
 export const handleLoginToken = (token) => async (dispatch) => {
