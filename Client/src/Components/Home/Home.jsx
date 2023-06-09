@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "../Home/Home.css"
+import { useSelector } from 'react-redux';
 export const Home = () => {
+    const { isAuthenticated, currentUser } = useSelector((store) => store.loginReducer);
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [currentLoggedInUser, setCurrentLoggedInUser] = useState({});
     useEffect(() => {
@@ -9,7 +11,7 @@ export const Home = () => {
         setCurrentLoggedInUser(user)
         if (token) setIsUserLoggedIn(true);
         else setIsUserLoggedIn(false);
-    }, []);
+    }, [isAuthenticated, currentUser]);
     return (
         <>
             {isUserLoggedIn ? (

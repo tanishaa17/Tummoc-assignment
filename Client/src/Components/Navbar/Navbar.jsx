@@ -13,6 +13,7 @@ export const Navbar = () => {
 
     const handleLogout = () => {
         dispatch(userLogout());
+        alert(`${currentLoggedInUser.name} logged out successfully`)
     };
 
     useEffect(() => {
