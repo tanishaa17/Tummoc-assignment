@@ -12,8 +12,6 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector((store) => store.loginReducer);
-
 
   const handleLogin = () => {
     const loginCreds = {
@@ -28,16 +26,6 @@ export const Login = () => {
         console.log(err);
       })
   }
-
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token") || [];
-  //   if (isAuthenticated) {
-  //     dispatch(userLogin({ token }));
-  //   } else {
-  //     localStorage.setItem("token", token);
-  //   }
-  // }, []);
 
   return (
     <form id="loginForm" onSubmit={(e) => e.preventDefault()}>

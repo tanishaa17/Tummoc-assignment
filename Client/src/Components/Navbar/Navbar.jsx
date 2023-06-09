@@ -17,11 +17,12 @@ export const Navbar = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        const user = JSON.parse(localStorage.getItem("user"))  || {};
+        const user = JSON.parse(localStorage.getItem("user")) || {};
         setCurrentLoggedInUser(user)
         if (token) setIsUserLoggedIn(true);
         else setIsUserLoggedIn(false);
-    }, [isAuthenticated, currentUser])
+    }, [isAuthenticated, currentUser]);
+
     return (
         <div id='navbar'>
             <img onClick={() => navigate('/')} src="https://tummoc.com/images/news/financialexpress-tummoc.png" alt="tummoc-logo" />
