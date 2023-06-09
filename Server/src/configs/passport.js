@@ -1,7 +1,7 @@
-// const passport = require('passport');
-// const JwtStrategy = require('passport-jwt').Strategy;
-// const ExtractJwt = require('passport-jwt').ExtractJwt;
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+
 const User = require('../Models/userModel');
 require('dotenv').config()
 
@@ -25,6 +25,7 @@ const initializePassport = (passport) => {
         }
     }));
 }
+
 
 
 

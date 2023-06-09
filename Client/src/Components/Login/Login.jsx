@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import '../Login/Login.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../Redux/Actions/action";
+import { handleLoginToken, userLogin } from "../Redux/Actions/action";
 import { FcGoogle } from "react-icons/fc"
+import { GoogleLogin } from 'react-google-login';
+
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated } = useSelector((store) => store.loginReducer);
 
 
@@ -17,18 +20,24 @@ export const Login = () => {
       email, password
     }
     // console.log(loginCreds);
-    dispatch(userLogin(loginCreds))
+    userLogin(loginCreds).then((res) => {
+      dispatch(handleLoginToken(res));
+      navigate("/")
+    })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 
-  useEffect(() => {
-    const token = localStorage.getItem("token") || [];
-    if (isAuthenticated) {
-      dispatch(userLogin({ token }));
-    } else {
-      localStorage.setItem("token", token);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token") || [];
+  //   if (isAuthenticated) {
+  //     dispatch(userLogin({ token }));
+  //   } else {
+  //     localStorage.setItem("token", token);
+  //   }
+  // }, []);
 
   return (
     <form id="loginForm" onSubmit={(e) => e.preventDefault()}>

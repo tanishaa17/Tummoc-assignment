@@ -1,11 +1,11 @@
 const express = require("express");
 const passport = require('passport');
-const router = express.Router();
+const userRouter = express.Router();
 const User = require('../Models/userModel')
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt")
 require('dotenv').config()
-router.post("/register", async (req, res) => {
+userRouter.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
     try {
         // To check if the email already exists in the database
@@ -27,11 +27,11 @@ router.post("/register", async (req, res) => {
 
 
     } catch (error) {
-        return res.status(200).send({ message: "Email already exists." });
+        return res.status(400).send({ message: "Email already exists." });
     }
 })
 
-router.post("/login", async (req, res, next) => {
+userRouter.post("/login", async (req, res, next) => {
     passport.authenticate('jwt', { session: false }, async (err, user) => {
         if (err) {
             return next(err);
@@ -49,7 +49,7 @@ router.post("/login", async (req, res, next) => {
                     if (result) {
                         const payload = { id: user._id };
                         const token = jwt.sign(payload, process.env.REACT_APP_SECRET_KEY);
-                        res.send({ msg: `Logged in successfully`, token })
+                        res.send({ msg: `Logged in successfully`, token, user })
                     } else {
                         res.status(400).send({ message: `Email or password is incorrect` });
                     }
@@ -69,4 +69,4 @@ router.post("/login", async (req, res, next) => {
 
 })
 
-module.exports = router
+module.exports = userRouter

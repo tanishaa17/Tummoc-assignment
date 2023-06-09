@@ -1,5 +1,5 @@
 import axios from "axios"
-import { USER_LOGOUT, USER_LOGIN_FAILED, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAILED, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "./actionType"
+import { USER_LOGOUT, USER_LOGIN_FAILED, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_REGISTER_FAILED, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, HANDLE_TOKEN } from "./actionType"
 const api = axios.create({
     baseURL: `https://fair-puce-agouti-suit.cyclic.app/`
     // baseURL: `http://localhost:8080`
@@ -18,23 +18,28 @@ export const userRegister = (userData) => async (dispatch) => {
 
     }
 }
-export const userLogin = (userCreds) => async (dispatch) => {
-    dispatch({ type: USER_LOGIN_REQUEST })
+export const userLogin = async (userCreds) => {
+    // dispatch({ type: USER_LOGIN_REQUEST })
     try {
         const res = await api.post(`/user/login`, userCreds)
         localStorage.setItem("token", res.data.token)
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data })
-        alert(`Logged in successfully`)
-        window.location.href = "/"
-        // console.log(res.data.token);
+        // dispatch({ type: USER_LOGIN_SUCCESS, payload: res.data })
+        alert(`Logged in successfully`);
+        console.log(res.data);
+        return res.data.token;
     } catch (error) {
-        dispatch({ type: USER_LOGIN_FAILED, payload: error })
+        // dispatch({ type: USER_LOGIN_FAILED, payload: error })
         alert(error.response.data.message)
         // console.log(error)
     }
 }
 
-export const userLogout = () => async (dispatch) => {
-    dispatch({ type: USER_LOGOUT })
+export const userLogout = async () => {
+    // dispatch({ type: USER_LOGOUT })
     localStorage.removeItem("token")
+}
+
+export const handleLoginToken = (token) => async (dispatch) => {
+    // dispatch({ type: HANDLE_TOKEN, token })
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: token })
 }

@@ -6,4 +6,6 @@ export const USER_LOGIN_REQUEST = "userLoginRequested";
 export const USER_LOGIN_SUCCESS = "userLoginSuccess";
 export const USER_LOGIN_FAILED = "userLoginFailed";
 
+export const HANDLE_TOKEN = "handleToken";
+
 export const USER_LOGOUT = "logout";

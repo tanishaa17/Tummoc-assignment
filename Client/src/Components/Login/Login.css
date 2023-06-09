@@ -1,8 +1,8 @@
-#loginForm{
+#loginForm {
     width: 40%;
     margin: auto;
     text-align: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
     background: #0E2E39;
     padding: 4% 0%;
     color: #EFCB0F;
@@ -36,7 +36,8 @@
     color: #EFCB0F;
     cursor: pointer;
 }
-#registerLink{
+
+#registerLink {
     text-decoration: none;
     color: #34BEA7;
     font-weight: bold;
